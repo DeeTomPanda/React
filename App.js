@@ -1,27 +1,48 @@
 import * as React from 'react';
 
-function App() {
-	const title='React';
-	const list=[
+const list=[
 		{
-			title_:"Learning"
+			title_:"Learning",
+			id:1,
+			language:"English"
 		},
 		{
-			title_:"React"
+			title_:"React",
+			id:2,
+			language:"English"
+
 		}];
+		
+function List()
+{
+   return(
+       <ul>
+	{    
+	 list.map(function (element)
+	         {
+	             return (
+	                     <li key={element.id}>
+			        <span>{element.title_}</span>
+			        <span>{element.language}</span>
+			     </li>
+	                    );
+	         }
+	         )
+	}
+        </ul>
+         );
+}
+	          
+
+function App() {
+	const title='React';
   return (
   <div>
 	<h1>{title}</h1>
 	  <hr/>
-	  <ul>
-	  {
-		  list.map(function(element)
-		   {
-			   return(<li> {element.title_} </li>);
-		   })}
-	</ul>
 	<label id="search">Search:</label>
-	<input id="search" type="text"/>  
+	<input id="search" type="text"/>
+	<List/> 
   </div>
   );
 }
