@@ -20,25 +20,26 @@ function List(props)
          );
 }
 	     
-function Search()
+function Search(props)
 {
-	const [changedText,setChangedText]=React.useState('');
-	const handleChange=(event)=>
-	{
-		console.log(event.target.value);
-		setChangedText(event.target.value);
-	}
 	return(
 	<div>
 	   <label id="search">Search</label>
-	   <input id="search" type="text" onChange={handleChange}/>
-	   <p><strong>{changedText}</strong></p>
+	   <input id="search" type="text" value={props.inputVal} onChange={props.eventHandler}/>
 	</div>
 	)
 }
 
 function App() {
 	const title='React';
+	const [changedText,setChangedText]=React.useState(localStorage.getItem('search')||'React');
+
+	function handleChange(e)
+	{
+		setChangedText(e.target.value);
+		localStorage.setItem('search',e.target.value);
+		console.log(e.target.value);
+	}
 	const stories=[
 		{
 		 title_:"React_Redux",
@@ -51,13 +52,21 @@ function App() {
 		 Author:"Robin"
 		}
 	];
+	const searchStories=stories.filter(function(element)
+		                             {
+					return(element.title_.toLowerCase().includes(changedText.toLowerCase()));
+					     });
+	console.log(stories);
   return (
   <div>
 	<h1>{title}</h1>
 	  <hr/>
-        <List custom={stories}/>
+	  <List custom={stories}/>
 	  <hr/>
-	<Search/> 
+	<Search eventHandler={handleChange} inputVal={changedText}/> 
+	<p><strong>{changedText}</strong></p>
+	<hr/>
+        <List custom={searchStories}/>
   </div>
   );
 }
