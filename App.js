@@ -1,5 +1,7 @@
 import * as React from 'react';
-		
+import axios from 'axios';		
+import './App.css';
+
 function List({custom,onClik})
 {	
    return(
@@ -23,26 +25,30 @@ function Item({item,onClik})
 {
 	return(
 		<>
-		{(item.title!==null && item.title!=='')?(
+		{(item.title!==null && item.title!=='')?( //Some items return null title,
+			                                  //This filters the bad apples
 	        <li>
 		   <span>{item.title}</span><span><a href={item.url}>{" "+item.url}</a></span>
 		   <span><button onClick={()=>onClik(item)}>{"Remove"}</button></span>
-		</li>):(<p></p>) }
+		</li>):(<span></span>) }
 		</>
 	);
 }
 
-function IpWithLabel({id,value,eventHandler,isFocused,label})
+function IpWithLabel({id,value,eventHandler,isFocused,label,handleSubmit})
                                                            //Destructuring in definition
 {
 	return(
 		<>
+		<form onSubmit={handleSubmit}>
 	        <label htmlFor={id}>{label}</label>
 		<input id={id}
 		       value={value}
 		       type="text"
 		       onChange={eventHandler}
 		       autoFocus={isFocused}/>
+                <button type="submit" disabled={!value}>{"Submit"}</button>
+		</form>
 		</>);
 }
 
@@ -151,9 +157,16 @@ const stories=[
 	           payload:item});
 	}
 
+	const handleSubmit=(event)=>
+	{
+		setUrl(`https://hn.algolia.com/api/v1/search?query=${changedText}`);
+		event.preventDefault();
+	}
 	const [newStories,setNewStories]=React.useReducer(storiesReducer,
 		{data:[],isLoading:false,isError:false});
 
+	const [url,setUrl]=React.useState(
+		`https://hn.algolia.com/api/v1/search?query=${changedText}`);
 	/*	const getAsyncStories=()=>
         {
 	    return(
@@ -175,7 +188,7 @@ const stories=[
 			                       payload:result.hits,});
 			         console.log(result);
 		                 })
-	},[changedText]);
+	},[url]);
 
 	React.useEffect(()=>
 		{
@@ -184,13 +197,14 @@ const stories=[
 
 
   return (
-  <div>
-	<h1>{title}</h1>
+  <div className="container">
+	<h1 className="headline-primary">{title}</h1>
 	  <hr/>
 	  <IpWithLabel label={"Search:"}
 	  id={"search"}  
 	  eventHandler={handleChange} 
 	  value={changedText}
+	  handleSubmit={handleSubmit}
 	  isFocused/> 
 	  { newStories.isLoading? (<p>LOADING...</p>):(
 	  <List custom={newStories.data} onClik={onClik}/>)}
