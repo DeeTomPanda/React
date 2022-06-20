@@ -25,11 +25,22 @@ function Item({item,onClik})
 {
 	return(
 		<>
-		{(item.title!==null && item.title!=='')?( //Some items return null title,
+		{(item.title!==null && item.title!=='' 
+		   && item.url!=null && item.url!='')?( //Some items return null title,
 			                                  //This filters the bad apples
-	        <li>
-		   <span>{item.title}</span><span><a href={item.url}>{" "+item.url}</a></span>
-		   <span><button onClick={()=>onClik(item)}>{"Remove"}</button></span>
+	        <li className="item">
+		   <span style={{width:'40%'}}>{item.title}</span>
+		   <span style={{width:'30%'}}><a href={item.url}>{" "+item.url}</a></span>
+		   <span>
+			<button 
+			       type='button'
+			       onClick={()=>onClik(item)}
+			       className="button button_small"
+			>
+			 
+			{"Remove"}
+			</button>
+		   </span>
 		</li>):(<span></span>) }
 		</>
 	);
@@ -40,14 +51,19 @@ function IpWithLabel({id,value,eventHandler,isFocused,label,handleSubmit})
 {
 	return(
 		<>
-		<form onSubmit={handleSubmit}>
-	        <label htmlFor={id}>{label}</label>
+		<form onSubmit={handleSubmit} className="search-form">
+	        <label htmlFor={id} className="label">{label}</label>
 		<input id={id}
 		       value={value}
 		       type="text"
 		       onChange={eventHandler}
-		       autoFocus={isFocused}/>
-                <button type="submit" disabled={!value}>{"Submit"}</button>
+		       autoFocus={isFocused}
+		       className="input"/>
+                <button className="button button_large" 
+		        type="submit" 
+		        disabled={!value}
+		>
+		{"Submit"}</button>
 		</form>
 		</>);
 }
@@ -206,10 +222,11 @@ const stories=[
 	  value={changedText}
 	  handleSubmit={handleSubmit}
 	  isFocused/> 
+	  <p><strong>{changedText}</strong></p>
 	  { newStories.isLoading? (<p>LOADING...</p>):(
 	  <List custom={newStories.data} onClik={onClik}/>)}
 	  <hr/>
-	<p><strong>{changedText}</strong></p>
+	
 	<hr/>
 	<hr/>
  </div>
