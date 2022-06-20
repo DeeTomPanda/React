@@ -27,9 +27,19 @@ function Item({item,onClik})
 		<>
 		{(item.title!==null && item.title!=='')?( //Some items return null title,
 			                                  //This filters the bad apples
-	        <li>
-		   <span>{item.title}</span><span><a href={item.url}>{" "+item.url}</a></span>
-		   <span><button onClick={()=>onClik(item)}>{"Remove"}</button></span>
+	        <li className="item">
+		   <span style={{width:'40%'}}>{item.title}</span>
+		   <span style={{width:'30%'}}><a href={item.url}>{" "+item.url}</a></span>
+		   <span>
+			<button 
+			       type='button'
+			       onClick={()=>onClik(item)}
+			       className="button button_small"
+			>
+			 
+			{"Remove"}
+			</button>
+		   </span>
 		</li>):(<span></span>) }
 		</>
 	);
