@@ -11,3 +11,8 @@ Implemented a mini Hacker News Search engine using HN API...
 
 ![Screenshot from 2022-06-17 23-47-38.png](https://user-images.githubusercontent.com/76088773/174355635-3a96e4bb-45a1-4f4b-8b34-5316d2bf304c.png)
 
+The CSS update looks like this
+
+![Screenshot from 2020-08-08 20-28-32](https://user-images.githubusercontent.com/76088773/174511802-de608ecf-75c3-45e3-b484-3ef03911d4b3.png)
+
+
