@@ -14,3 +14,8 @@ Implemented a mini Hacker News Search engine using HN API...
 The CSS update looks like this(which can be found in branches of this)
 
 ![Screenshot from 2022-06-20 07-17-40](https://user-images.githubusercontent.com/76088773/174642294-a62ae8c6-5edf-4b7d-8a6e-636b4d53ac82.png)
+
+Final Update:
+Addition of SVG's to buttons![Screenshot from 2022-06-21 00-50-42](https://user-images.githubusercontent.com/76088773/175078276-80065052-da40-408d-a9d0-32432af897e8.png)
+
+
